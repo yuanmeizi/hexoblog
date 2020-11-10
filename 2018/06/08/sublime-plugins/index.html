@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="简述sublime插件安装过程Sublime Text 是一个代码编辑器，也是HTML和散文先进的文本编辑器。Sublime Text具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。Sublime">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sublime插件安装及推荐">
+<meta property="og:url" content="http://example.com/2018/06/08/sublime-plugins/index.html">
+<meta property="og:site_name" content="yuanmeiziのblog">
+<meta property="og:description" content="简述sublime插件安装过程Sublime Text 是一个代码编辑器，也是HTML和散文先进的文本编辑器。Sublime Text具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。Sublime">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2018/06/08/5b1a496b11e0a.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/06/08/5b1a4a6eeafc1.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/06/08/5b1a4b898e514.jpg">
+<meta property="article:published_time" content="2018-06-08T01:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-10T03:53:48.589Z">
+<meta property="article:author" content="yuanmeizi">
+<meta property="article:tag" content="plugins">
+<meta property="article:tag" content="sublime">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2018/06/08/5b1a496b11e0a.jpg">
+
+<link rel="canonical" href="http://example.com/2018/06/08/sublime-plugins/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>sublime插件安装及推荐 | yuanmeiziのblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yuanmeiziのblog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">随便记录点东西</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/08/sublime-plugins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yuanmeizi">
+      <meta itemprop="description" content="斯人若彩虹,遇上方知有">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yuanmeiziのblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          sublime插件安装及推荐
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-08 09:30:00" itemprop="dateCreated datePublished" datetime="2018-06-08T09:30:00+08:00">2018-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-10 11:53:48" itemprop="dateModified" datetime="2020-11-10T11:53:48+08:00">2020-11-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sublime/" itemprop="url" rel="index"><span itemprop="name">sublime</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简述sublime插件安装过程"><a href="#简述sublime插件安装过程" class="headerlink" title="简述sublime插件安装过程"></a>简述sublime插件安装过程</h1><p>Sublime Text 是一个代码编辑器，也是HTML和散文先进的文本编辑器。Sublime Text具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。Sublime Text 是一个跨平台的编辑器，同时支持Windows、Linux、Mac OS X等操作系统。</p>
+<p>我个人很喜欢用sublime，在此简述下sublime插件的安装过程</p>
+<a id="more"></a>
+
+<h2 id="下载安装sublime"><a href="#下载安装sublime" class="headerlink" title="下载安装sublime"></a>下载安装sublime</h2><p>打开<a target="_blank" rel="noopener" href="https://www.sublimetext.com/">sublime官网</a>,下载安装程序，此篇文章更新时，sublime版本为3176.<br>安装完成后，打开界sublime，按 <strong>ctrl + `</strong> 调出console(ps:如果快捷键有冲突，可以要通过菜单栏上的<strong>vivw-show console</strong>打开console)</p>
+<p>在console中输入以下代码</p>
+<pre><code>import urllib.request,os,hashlib; h = &#39;6f4c264a24d933ce70df5dedcf1dcaee&#39; + &#39;ebe013ee18cced0ef93d5f746d80ef60&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; + pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).write(by)</code></pre>
+<p>重启sublime，如果在菜单栏<strong>preferences</strong>选项中，可以看到package control，则package control安装成功。如下图所示</p>
+<p><img src="https://i.loli.net/2018/06/08/5b1a496b11e0a.jpg" alt="1528449376(1).jpg"></p>
+<p>package control安装成功后，我们就可以直接在线安装插件了， 按下<strong>ctrl+shift+p</strong>调出命令面板，输入<code>install package</code>,直接回车或点击红框中的选项。</p>
+<p><img src="https://i.loli.net/2018/06/08/5b1a4a6eeafc1.jpg" alt="1528449636(1).jpg"></p>
+<p>然后，插件安装列表会弹出，搜索选择需要的插件，直接安装便可。</p>
+<p>若需要删除插件，按下<strong>ctrl+shift+p</strong>调出命令面板,输入<code>remove package</code>,直接回车或点击红框中的选项。</p>
+<p><img src="https://i.loli.net/2018/06/08/5b1a4b898e514.jpg" alt="1528449871(1).jpg"></p>
+<p>然后在插件列表中选择要删除的插件。</p>
+<h1 id="sublime插件推荐"><a href="#sublime插件推荐" class="headerlink" title="sublime插件推荐"></a>sublime插件推荐</h1><h4 id="chineseLocalizations"><a href="#chineseLocalizations" class="headerlink" title="chineseLocalizations"></a>chineseLocalizations</h4><p>汉化插件，把界面的英文更改为中文</p>
+<h4 id="IMESupport"><a href="#IMESupport" class="headerlink" title="IMESupport"></a>IMESupport</h4><p>输入法候选框跟随</p>
+<h4 id="Emmet"><a href="#Emmet" class="headerlink" title="Emmet"></a>Emmet</h4><p>前端代码补全，贼方便</p>
+<h4 id="AutoFileName"><a href="#AutoFileName" class="headerlink" title="AutoFileName"></a>AutoFileName</h4><p>在src中提示文件路径并补全</p>
+<h4 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h4><p>CSS3代码补全</p>
+<h4 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h4><p>jQuery代码补全</p>
+<h4 id="sublimeCodeintel"><a href="#sublimeCodeintel" class="headerlink" title="sublimeCodeintel"></a>sublimeCodeintel</h4><p>代码提示补全</p>
+<h4 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h4><p>侧边栏功能增强</p>
+<h4 id="CSS3-1"><a href="#CSS3-1" class="headerlink" title="CSS3"></a>CSS3</h4><p>CSS3代码补全</p>
+<h4 id="Browser-Refresh"><a href="#Browser-Refresh" class="headerlink" title="Browser Refresh"></a>Browser Refresh</h4><p>浏览器刷新网页</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/plugins/" rel="tag"># plugins</a>
+              <a href="/tags/sublime/" rel="tag"># sublime</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/22/hexo-theme/" rel="prev" title="hexo博客主题设置">
+      <i class="fa fa-chevron-left"></i> hexo博客主题设置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/06/18/function-prototype%E7%BB%A7%E6%89%BF/" rel="next" title="function prototype的继承">
+      function prototype的继承 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0sublime%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">简述sublime插件安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85sublime"><span class="nav-number">1.1.</span> <span class="nav-text">下载安装sublime</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sublime%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="nav-number">2.</span> <span class="nav-text">sublime插件推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#chineseLocalizations"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">chineseLocalizations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IMESupport"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">IMESupport</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Emmet"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">Emmet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AutoFileName"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">AutoFileName</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS3"><span class="nav-number">2.0.0.5.</span> <span class="nav-text">CSS3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery"><span class="nav-number">2.0.0.6.</span> <span class="nav-text">jQuery</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sublimeCodeintel"><span class="nav-number">2.0.0.7.</span> <span class="nav-text">sublimeCodeintel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SideBarEnhancements"><span class="nav-number">2.0.0.8.</span> <span class="nav-text">SideBarEnhancements</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS3-1"><span class="nav-number">2.0.0.9.</span> <span class="nav-text">CSS3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Browser-Refresh"><span class="nav-number">2.0.0.10.</span> <span class="nav-text">Browser Refresh</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yuanmeizi</p>
+  <div class="site-description" itemprop="description">斯人若彩虹,遇上方知有</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuanmeizi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='153,153,153' opacity='0.8' zIndex='-1' count='144' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":160,"height":320},"mobile":{"show":false},"rect":{"opacity":1},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="记录一些前端的小tips(其实没软用)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端小tips">
+<meta property="og:url" content="http://example.com/2018/07/10/tips/index.html">
+<meta property="og:site_name" content="yuanmeiziのblog">
+<meta property="og:description" content="记录一些前端的小tips(其实没软用)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2018/12/03/5c04c072e36e1.png">
+<meta property="og:image" content="https://i.loli.net/2019/06/05/5cf73018241b418593.jpg">
+<meta property="article:published_time" content="2018-07-10T01:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-10T03:53:48.589Z">
+<meta property="article:author" content="yuanmeizi">
+<meta property="article:tag" content="tips">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/03/5c04c072e36e1.png">
+
+<link rel="canonical" href="http://example.com/2018/07/10/tips/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>前端小tips | yuanmeiziのblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yuanmeiziのblog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">随便记录点东西</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/07/10/tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yuanmeizi">
+      <meta itemprop="description" content="斯人若彩虹,遇上方知有">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yuanmeiziのblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端小tips
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-10 09:30:00" itemprop="dateCreated datePublished" datetime="2018-07-10T09:30:00+08:00">2018-07-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-10 11:53:48" itemprop="dateModified" datetime="2020-11-10T11:53:48+08:00">2020-11-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tips/" itemprop="url" rel="index"><span itemprop="name">tips</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="记录一些前端的小tips"><a href="#记录一些前端的小tips" class="headerlink" title="记录一些前端的小tips"></a>记录一些前端的小tips</h1><p>(其实没软用)</p>
+<a id="more"></a>
+
+<h2 id="去除input、textarea的边框内阴影"><a href="#去除input、textarea的边框内阴影" class="headerlink" title="去除input、textarea的边框内阴影"></a>去除input、textarea的边框内阴影</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">  outline:none;</span><br><span class="line">  -webkit-appearance:none;</span><br><span class="line">&#125;</span><br><span class="line">存在border时也会有内阴影</span><br></pre></td></tr></table></figure>
+
+<h2 id="img标签加载图片错误时显示默认图片"><a href="#img标签加载图片错误时显示默认图片" class="headerlink" title="img标签加载图片错误时显示默认图片"></a>img标签加载图片错误时显示默认图片</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;&#x2F;imgfile&#x2F;153.jpeg&quot; onerror&#x3D;&quot;this.src&#x3D;&#39;&#x2F;images&#x2F;noimg.jpg&#39;;this.onerror&#x3D;null;&quot;&gt; 当加载&#x2F;imgfile&#x2F;153.jpeg图片错误时,加载&#x2F;images&#x2F;noimg.jpg图片,同时将onerror设为null，否则如果noimg图片加载错误，会一直触发onerror</span><br></pre></td></tr></table></figure>
+
+<h2 id="css控制单行文本溢出部分为省略号"><a href="#css控制单行文本溢出部分为省略号" class="headerlink" title="css控制单行文本溢出部分为省略号"></a>css控制单行文本溢出部分为省略号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">｛  还需要加宽度上的限制</span><br><span class="line">	overflow: hidden;</span><br><span class="line">	text-overflow:ellipsis;</span><br><span class="line">	white-space: nowrap;</span><br><span class="line">｝</span><br><span class="line">省略号颜色受color的控制</span><br></pre></td></tr></table></figure>
+
+<h2 id="css控制多行文本溢出部分为省略号"><a href="#css控制多行文本溢出部分为省略号" class="headerlink" title="css控制多行文本溢出部分为省略号"></a>css控制多行文本溢出部分为省略号</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">｛  还需要加宽度上的限制</span><br><span class="line">	display: -webkit-box;           将对象作为弹性伸缩盒子模型显示 </span><br><span class="line">	-webkit-box-orient: vertical;   设置或检索伸缩盒对象的子元素的排列方式</span><br><span class="line">	-webkit-line-clamp: 3;          限制在一个块元素显示的文本的行数(依据需要更改)</span><br><span class="line">	overflow: hidden;</span><br><span class="line">｝</span><br><span class="line">需要控制div高度和文字行高，如果div中有四行文字,这里只会在第三行末尾显示省略号</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置canvas充满整个屏幕而不出现滚动条"><a href="#设置canvas充满整个屏幕而不出现滚动条" class="headerlink" title="设置canvas充满整个屏幕而不出现滚动条"></a>设置canvas充满整个屏幕而不出现滚动条</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">canvas&#123;</span><br><span class="line">  display:block;</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- 或者 --&gt;</span><br><span class="line">canvas&#123;</span><br><span class="line">  vertical-align:top;&#x2F;&#x2F;默认为baseline</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- 在js中设置canvas的宽高,尽量不要在css中设置 --&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="flex流式布局"><a href="#flex流式布局" class="headerlink" title="flex流式布局"></a>flex流式布局</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 这里以ul为父元素,li为子元素 --&gt;</span><br><span class="line">ul&#123;</span><br><span class="line">  display:flex;</span><br><span class="line">  flex-wrap:wrap;</span><br><span class="line">  box-pack:justify;</span><br><span class="line">  box-align:justify;</span><br><span class="line">  flex-direction:row;</span><br><span class="line">  align-content:center;</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">  width:   ;</span><br><span class="line">  height:  ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="利用媒体查询引入不同的css文件"><a href="#利用媒体查询引入不同的css文件" class="headerlink" title="利用媒体查询引入不同的css文件"></a>利用媒体查询引入不同的css文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; media&#x3D;&quot;screen and (min-width:1px) and (max-width:500px)&quot; href&#x3D;&quot;xxxxxxx&quot; &#x2F;&gt;</span><br><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; media&#x3D;&quot;screen and (min-width:500px)&quot; href&#x3D;&quot;xxxxx&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ie6-ie8支持html5新增标签，支持媒体查询"><a href="#ie6-ie8支持html5新增标签，支持媒体查询" class="headerlink" title="ie6-ie8支持html5新增标签，支持媒体查询"></a>ie6-ie8支持html5新增标签，支持媒体查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--[if lt IE 9]&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;oss.maxcdn.com&#x2F;libs&#x2F;html5shiv&#x2F;3.7.0&#x2F;html5shiv.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;oss.maxcdn.com&#x2F;libs&#x2F;respond.js&#x2F;1.4.2&#x2F;respond.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;![endif]--&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="构建后台管理系统可能会用到的一些插件"><a href="#构建后台管理系统可能会用到的一些插件" class="headerlink" title="构建后台管理系统可能会用到的一些插件"></a>构建后台管理系统可能会用到的一些插件</h2><p>metisMenu侧边栏</p>
+<p>chart、morris图表</p>
+<p>datatables表格</p>
+<p>echarts图表</p>
+<h2 id="async加载脚本"><a href="#async加载脚本" class="headerlink" title="async加载脚本"></a>async加载脚本</h2><p><code>&lt;script src=&quot;example.js&quot;&gt;&lt;/script&gt;</code></p>
+<p>使用上面这种方式时，页面会在这个脚本文件被完全下载、解析、执行完后才去渲染之后的HTML，在这之前会一直处于阻塞状态。这就意味着会增加你的页面的加载时间。有时这种行为是我们希望的，而大多数时候则不想要。</p>
+<p><code>&lt;script async src=&quot;example.js&quot;&gt;&lt;/script&gt;</code></p>
+<p>使用上面这种方式时，脚本的加载是异步的，不会影响到这之后的页面解析。脚本会在下载完之后立即执行。需要注意的是，如果有多个使用这种方式异步加载的脚本，他们是没有特定的执行顺序的。</p>
+<h2 id="表格td内部内容过多时，样式被改变"><a href="#表格td内部内容过多时，样式被改变" class="headerlink" title="表格td内部内容过多时，样式被改变"></a>表格td内部内容过多时，样式被改变</h2><p>这里将过多的内容改为省略号<br>table{<br>  table-layout: fixed;<br>}<br>td{<br>  overflow:hidden;<br>  text-overflow: ellipsis;<br>  max-width:你选择的宽度;<br>  white-space:nowrap;<br>}</p>
+<h2 id="用data-url代替url-减少http请求"><a href="#用data-url代替url-减少http请求" class="headerlink" title="用data-url代替url,减少http请求"></a>用data-url代替url,减少http请求</h2><p>Data-URI是指使用图片的数据代替通常使用的图片URI,合理使用它减少HTTP请求数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.icon&#123;</span><br><span class="line">  background-image: url(&#39;foo.png&#39;);</span><br><span class="line">&#125;</span><br><span class="line">.icon&#123;</span><br><span class="line">  background-image: url(&#39;data:image&#x2F;png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII%3D&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="js判断设备是否是移动端"><a href="#js判断设备是否是移动端" class="headerlink" title="js判断设备是否是移动端"></a>js判断设备是否是移动端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.userAgent.match(&#x2F;(iPhone|iPod|Android|ios)&#x2F;i)</span><br></pre></td></tr></table></figure>
+
+<h2 id="safari浏览器body点击事件不能触发"><a href="#safari浏览器body点击事件不能触发" class="headerlink" title="safari浏览器body点击事件不能触发"></a>safari浏览器body点击事件不能触发</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ios设备(包括iPhone和ipad）,给window ，html，document，body绑定click事件，点击不会触发</span><br><span class="line">由于ios系统浏览器都用的safari内核，所以ios端safari浏览器全部中枪</span><br><span class="line"></span><br><span class="line">解决方案：</span><br><span class="line">改用touch事件（如果是弹出层的话，会有点透问题）</span><br><span class="line">委托到其他父元素都可以</span><br><span class="line">safari对事件的解析非常特殊，如果一个事件曾经被响应过，则会一直冒泡（捕获）到根结点，所以对于已大规模触发的情况，只需要在body元素的所有子元素绑定一个空事件就好了，如： $(&quot;body &gt; *&quot;).on(&quot;click&quot;, function()&#123;&#125;;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="div和背景图片的自适应"><a href="#div和背景图片的自适应" class="headerlink" title="div和背景图片的自适应"></a>div和背景图片的自适应</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">假设背景图片宽高比为 宽&#x2F;高&#x3D;80%</span><br><span class="line">div&#123;</span><br><span class="line">  width:40%;这里的40%根据div的父容器的宽度来定，根据需要自己调节</span><br><span class="line">  padding-top:32%; div容器不设定高度，高度由padding来撑开,40%*80% &#x3D; 32%,32%的值也根据父容器的宽度来定</span><br><span class="line">  background : xxxxxxx  设定背景图片</span><br><span class="line">&#125;</span><br><span class="line">缺点是因为高度由padding-top撑开，不能设定高度,div容器内也不能有其他元素占位，需要设置子元素position：absolute</span><br></pre></td></tr></table></figure>
+
+<h2 id="一些常用的meta标签"><a href="#一些常用的meta标签" class="headerlink" title="一些常用的meta标签"></a>一些常用的meta标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!-- 关键字，搜索引擎 SEO --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;keywords&quot; content&#x3D;&quot;关键字1,关键字2,...&quot;&gt; </span><br><span class="line">&lt;!-- 页面描述 --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;description&quot; content&#x3D;&quot;网页描述&quot;&gt; </span><br><span class="line">&lt;!-- 如果安装了GCF，则使用GCF来渲染页面，如果没有安装GCF，则使用最高版本的IE内核进行渲染。</span><br><span class="line">X-UA-Compatible：这是个是IE8的专用标记,用来指定IE8浏览器去模拟某个特定版本的IE浏览器的渲染方式(比如人见人烦的IE6)，以此来解决部分兼容问题。 --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;Edge,chrome&#x3D;1&quot; &gt;</span><br><span class="line">&lt;!-- 自动刷新，并指向新的页面 --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;Refresh&quot; content&#x3D;&quot;2；URL&#x3D;http:&#x2F;&#x2F;&quot;&gt;</span><br><span class="line">&lt;!-- 禁止浏览器缓存 --&gt;</span><br><span class="line">&lt;!-- 是用于设定禁止浏览器从本地机的缓存中调阅页面内容，设定后一旦离开网页就无法从Cache中再调出</span><br><span class="line">用法： --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;pragram&quot; content&#x3D;&quot;no-cache&quot;&gt; </span><br><span class="line">&lt;!-- 清除缓存（再访问这个网站要重新下载！） --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;cache-control&quot; content&#x3D;&quot;no-cache, must-revalidate&quot;&gt; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 手机端 --&gt;</span><br><span class="line">&lt;meta name&#x3D;&quot;format-detection&quot; content&#x3D;&quot;telephone&#x3D;no, email&#x3D;no&quot;&#x2F;&gt;</span><br><span class="line">&lt;!-- 忽略页面中的数字识别为电话，忽略email识别 edge会识别一定格式的数字为电话号码,导致数字有a链接般的显示效果,在页面中加入这句可禁止--&gt;</span><br><span class="line">&lt;meta name&#x3D;&quot;apple-mobile-web-app-status-bar-style&quot; content&#x3D;&quot;black&quot;&#x2F;&gt;</span><br><span class="line">&lt;!-- 设置苹果工具栏颜色 --&gt;</span><br><span class="line">&lt;!-- 不让百度转码 --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;Cache-Control&quot; content&#x3D;&quot;no-siteapp&quot; &#x2F;&gt;</span><br><span class="line">&lt;!-- 不缓存 --&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;cache-control&quot; content&#x3D;&quot;no-cache&quot; &#x2F;&gt;</span><br><span class="line">&lt;!-- 初始化设备 --&gt;</span><br><span class="line">&lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0, maximum-scale&#x3D;1.0, minimum-scale&#x3D;1.0, user-scalable&#x3D;0&quot;&gt;</span><br><span class="line">&lt;!-- 网站开启对iphone私有 web app 程序的支持 --&gt;</span><br><span class="line">&lt;meta content&#x3D;&quot;yes&quot; name&#x3D;&quot;apple-mobile-web-app-capable&quot; &#x2F;&gt;</span><br><span class="line">&lt;!-- 改变顶部状态条的颜色 iphone私有的属性--&gt;</span><br><span class="line">&lt;meta content&#x3D;&quot;black&quot; name&#x3D;&quot;apple-mobile-web-app-status-bar-style&quot; &#x2F;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="ie-csshack"><a href="#ie-csshack" class="headerlink" title="ie csshack"></a>ie csshack</h2><p><img src="https://i.loli.net/2018/12/03/5c04c072e36e1.png" alt="iecsshack.PNG"></p>
+<h2 id="淘宝移动端左右两栏布局"><a href="#淘宝移动端左右两栏布局" class="headerlink" title="淘宝移动端左右两栏布局"></a>淘宝移动端左右两栏布局</h2><p><img src="https://i.loli.net/2019/06/05/5cf73018241b418593.jpg" alt="taobaoshangpinlianglanbuju.PNG"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;img&quot;&gt;&lt;img src&#x3D;&quot;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;info&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;title&quot;&gt;标题&lt;&#x2F;div&gt;</span><br><span class="line">    .........</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">.container&#123;</span><br><span class="line">  display:-webkit-box;</span><br><span class="line">&#125;</span><br><span class="line">.container .img&#123;</span><br><span class="line">  width:40px;height:40px;</span><br><span class="line">&#125;</span><br><span class="line">.container .img img&#123;</span><br><span class="line">  width:100%;height:100%;</span><br><span class="line">&#125;</span><br><span class="line">.container .info&#123;</span><br><span class="line">  -webkit-box-flex:1;</span><br><span class="line">&#125;</span><br><span class="line">.container .info .title&#123;</span><br><span class="line">  height:25px;</span><br><span class="line">  &lt;!-- 通过.title一个高度，当文字过长时候可以自动换行 --&gt;</span><br><span class="line">&#125;</span><br><span class="line">左边.img设置一个宽高固定的div(可以用媒体查询适配)</span><br><span class="line">右边.info通过-webkit-box-flex:1;占据剩下的宽度(.info必须为display:block)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="ios移动端系统软键盘换行变为前往"><a href="#ios移动端系统软键盘换行变为前往" class="headerlink" title="ios移动端系统软键盘换行变为前往"></a>ios移动端系统软键盘换行变为前往</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">需要把input放在form内</span><br><span class="line">&lt;form action&#x3D;&quot;&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;请输入&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ios输入框直接呼出数字九键的键盘"><a href="#ios输入框直接呼出数字九键的键盘" class="headerlink" title="ios输入框直接呼出数字九键的键盘"></a>ios输入框直接呼出数字九键的键盘</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; pattern&#x3D;&quot;[0-9]*&quot; placeholder&#x3D;&quot;请输入数字1&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ios输入框直接呼出26键带有标点符号的数字键盘"><a href="#ios输入框直接呼出26键带有标点符号的数字键盘" class="headerlink" title="ios输入框直接呼出26键带有标点符号的数字键盘"></a>ios输入框直接呼出26键带有标点符号的数字键盘</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;number&quot; placeholder&#x3D;&quot;请输入数字&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="打印页面去掉页眉和页脚"><a href="#打印页面去掉页眉和页脚" class="headerlink" title="打印页面去掉页眉和页脚"></a>打印页面去掉页眉和页脚</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style media&#x3D;&quot;print&quot;&gt;</span><br><span class="line">    @page</span><br><span class="line">    &#123;</span><br><span class="line">        size: auto;</span><br><span class="line">        margin: 7mm auto;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>加大打印时候的边距(金大雕说只在谷歌上有效,ie上我记得看过用注册表实现的方法)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/tips/" rel="tag"># tips</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/18/function-prototype%E7%BB%A7%E6%89%BF/" rel="prev" title="function prototype的继承">
+      <i class="fa fa-chevron-left"></i> function prototype的继承
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/20/%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9/" rel="next" title="canvas图片压缩">
+      canvas图片压缩 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF%E7%9A%84%E5%B0%8Ftips"><span class="nav-number">1.</span> <span class="nav-text">记录一些前端的小tips</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4input%E3%80%81textarea%E7%9A%84%E8%BE%B9%E6%A1%86%E5%86%85%E9%98%B4%E5%BD%B1"><span class="nav-number">1.1.</span> <span class="nav-text">去除input、textarea的边框内阴影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#img%E6%A0%87%E7%AD%BE%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E9%94%99%E8%AF%AF%E6%97%B6%E6%98%BE%E7%A4%BA%E9%BB%98%E8%AE%A4%E5%9B%BE%E7%89%87"><span class="nav-number">1.2.</span> <span class="nav-text">img标签加载图片错误时显示默认图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css%E6%8E%A7%E5%88%B6%E5%8D%95%E8%A1%8C%E6%96%87%E6%9C%AC%E6%BA%A2%E5%87%BA%E9%83%A8%E5%88%86%E4%B8%BA%E7%9C%81%E7%95%A5%E5%8F%B7"><span class="nav-number">1.3.</span> <span class="nav-text">css控制单行文本溢出部分为省略号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css%E6%8E%A7%E5%88%B6%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E6%BA%A2%E5%87%BA%E9%83%A8%E5%88%86%E4%B8%BA%E7%9C%81%E7%95%A5%E5%8F%B7"><span class="nav-number">1.4.</span> <span class="nav-text">css控制多行文本溢出部分为省略号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEcanvas%E5%85%85%E6%BB%A1%E6%95%B4%E4%B8%AA%E5%B1%8F%E5%B9%95%E8%80%8C%E4%B8%8D%E5%87%BA%E7%8E%B0%E6%BB%9A%E5%8A%A8%E6%9D%A1"><span class="nav-number">1.5.</span> <span class="nav-text">设置canvas充满整个屏幕而不出现滚动条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80"><span class="nav-number">1.6.</span> <span class="nav-text">flex流式布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2%E5%BC%95%E5%85%A5%E4%B8%8D%E5%90%8C%E7%9A%84css%E6%96%87%E4%BB%B6"><span class="nav-number">1.7.</span> <span class="nav-text">利用媒体查询引入不同的css文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ie6-ie8%E6%94%AF%E6%8C%81html5%E6%96%B0%E5%A2%9E%E6%A0%87%E7%AD%BE%EF%BC%8C%E6%94%AF%E6%8C%81%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.8.</span> <span class="nav-text">ie6-ie8支持html5新增标签，支持媒体查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%8F%AF%E8%83%BD%E4%BC%9A%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8F%92%E4%BB%B6"><span class="nav-number">1.9.</span> <span class="nav-text">构建后台管理系统可能会用到的一些插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async%E5%8A%A0%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="nav-number">1.10.</span> <span class="nav-text">async加载脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BCtd%E5%86%85%E9%83%A8%E5%86%85%E5%AE%B9%E8%BF%87%E5%A4%9A%E6%97%B6%EF%BC%8C%E6%A0%B7%E5%BC%8F%E8%A2%AB%E6%94%B9%E5%8F%98"><span class="nav-number">1.11.</span> <span class="nav-text">表格td内部内容过多时，样式被改变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8data-url%E4%BB%A3%E6%9B%BFurl-%E5%87%8F%E5%B0%91http%E8%AF%B7%E6%B1%82"><span class="nav-number">1.12.</span> <span class="nav-text">用data-url代替url,减少http请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js%E5%88%A4%E6%96%AD%E8%AE%BE%E5%A4%87%E6%98%AF%E5%90%A6%E6%98%AF%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="nav-number">1.13.</span> <span class="nav-text">js判断设备是否是移动端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#safari%E6%B5%8F%E8%A7%88%E5%99%A8body%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E4%B8%8D%E8%83%BD%E8%A7%A6%E5%8F%91"><span class="nav-number">1.14.</span> <span class="nav-text">safari浏览器body点击事件不能触发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#div%E5%92%8C%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E7%9A%84%E8%87%AA%E9%80%82%E5%BA%94"><span class="nav-number">1.15.</span> <span class="nav-text">div和背景图片的自适应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84meta%E6%A0%87%E7%AD%BE"><span class="nav-number">1.16.</span> <span class="nav-text">一些常用的meta标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ie-csshack"><span class="nav-number">1.17.</span> <span class="nav-text">ie csshack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%98%E5%AE%9D%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%B7%A6%E5%8F%B3%E4%B8%A4%E6%A0%8F%E5%B8%83%E5%B1%80"><span class="nav-number">1.18.</span> <span class="nav-text">淘宝移动端左右两栏布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ios%E7%A7%BB%E5%8A%A8%E7%AB%AF%E7%B3%BB%E7%BB%9F%E8%BD%AF%E9%94%AE%E7%9B%98%E6%8D%A2%E8%A1%8C%E5%8F%98%E4%B8%BA%E5%89%8D%E5%BE%80"><span class="nav-number">1.19.</span> <span class="nav-text">ios移动端系统软键盘换行变为前往</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ios%E8%BE%93%E5%85%A5%E6%A1%86%E7%9B%B4%E6%8E%A5%E5%91%BC%E5%87%BA%E6%95%B0%E5%AD%97%E4%B9%9D%E9%94%AE%E7%9A%84%E9%94%AE%E7%9B%98"><span class="nav-number">1.20.</span> <span class="nav-text">ios输入框直接呼出数字九键的键盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ios%E8%BE%93%E5%85%A5%E6%A1%86%E7%9B%B4%E6%8E%A5%E5%91%BC%E5%87%BA26%E9%94%AE%E5%B8%A6%E6%9C%89%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7%E7%9A%84%E6%95%B0%E5%AD%97%E9%94%AE%E7%9B%98"><span class="nav-number">1.21.</span> <span class="nav-text">ios输入框直接呼出26键带有标点符号的数字键盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E9%A1%B5%E9%9D%A2%E5%8E%BB%E6%8E%89%E9%A1%B5%E7%9C%89%E5%92%8C%E9%A1%B5%E8%84%9A"><span class="nav-number">1.22.</span> <span class="nav-text">打印页面去掉页眉和页脚</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yuanmeizi</p>
+  <div class="site-description" itemprop="description">斯人若彩虹,遇上方知有</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuanmeizi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='153,153,153' opacity='0.8' zIndex='-1' count='144' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":160,"height":320},"mobile":{"show":false},"rect":{"opacity":1},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

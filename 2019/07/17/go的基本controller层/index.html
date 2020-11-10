@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="beego框架里controller层的一些常用封装(其实没软用)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="beego框架里一些常用的东西封装">
+<meta property="og:url" content="http://example.com/2019/07/17/go%E7%9A%84%E5%9F%BA%E6%9C%ACcontroller%E5%B1%82/index.html">
+<meta property="og:site_name" content="yuanmeiziのblog">
+<meta property="og:description" content="beego框架里controller层的一些常用封装(其实没软用)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-17T08:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-10T03:53:48.589Z">
+<meta property="article:author" content="yuanmeizi">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="beego">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2019/07/17/go%E7%9A%84%E5%9F%BA%E6%9C%ACcontroller%E5%B1%82/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>beego框架里一些常用的东西封装 | yuanmeiziのblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">yuanmeiziのblog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">随便记录点东西</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/07/17/go%E7%9A%84%E5%9F%BA%E6%9C%ACcontroller%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yuanmeizi">
+      <meta itemprop="description" content="斯人若彩虹,遇上方知有">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yuanmeiziのblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          beego框架里一些常用的东西封装
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-17 16:30:00" itemprop="dateCreated datePublished" datetime="2019-07-17T16:30:00+08:00">2019-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-10 11:53:48" itemprop="dateModified" datetime="2020-11-10T11:53:48+08:00">2020-11-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tips/" itemprop="url" rel="index"><span itemprop="name">tips</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="beego框架里controller层的一些常用封装"><a href="#beego框架里controller层的一些常用封装" class="headerlink" title="beego框架里controller层的一些常用封装"></a>beego框架里controller层的一些常用封装</h1><p>(其实没软用)</p>
+<a id="more"></a>
+
+
+<h2 id="beego框架里controller层的一些常用封装-1"><a href="#beego框架里controller层的一些常用封装-1" class="headerlink" title="beego框架里controller层的一些常用封装"></a>beego框架里controller层的一些常用封装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br></pre></td><td class="code"><pre><span class="line">package controllers</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;..&#x2F;models&quot;</span><br><span class="line">    &quot;crypto&#x2F;md5&quot;</span><br><span class="line">    &quot;encoding&#x2F;json&quot;</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &quot;github.com&#x2F;astaxie&#x2F;beego&quot;</span><br><span class="line">    &quot;io&#x2F;ioutil&quot;</span><br><span class="line">    &quot;log&quot;</span><br><span class="line">    &quot;net&quot;</span><br><span class="line">    &quot;os&quot;</span><br><span class="line">    &quot;path&#x2F;filepath&quot;</span><br><span class="line">    &quot;strconv&quot;</span><br><span class="line">    &quot;strings&quot;</span><br><span class="line">    &quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type wycontroller struct &#123;</span><br><span class="line">    beego.Controller</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获得返回结果的JSON字符串</span><br><span class="line">type st_json_normal_data struct &#123;</span><br><span class="line">    Status int         &#96;json:&quot;status&quot;&#96;</span><br><span class="line">    Msg    string      &#96;json:&quot;msg&quot;&#96;</span><br><span class="line">    Data   interface&#123;&#125; &#96;json:&quot;datalist&quot;&#96;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var (</span><br><span class="line">    ImgExt &#x3D; []string&#123;&quot;jpg&quot;, &quot;gif&quot;, &quot;png&quot;, &quot;jpeg&quot;, &quot;bmp&quot;, &quot;&quot;&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获得当前时间</span><br><span class="line">func (this *ywcontroller) GetDateTime() string &#123;</span><br><span class="line">    return time.Now().Format(&quot;2006-01-02 15:04:05&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 转换时间字符串格式</span><br><span class="line">&#x2F;&#x2F; 时间格式：2006-01-02 15:04:05</span><br><span class="line">&#x2F;&#x2F; timestr: 需要转换的日期</span><br><span class="line">&#x2F;&#x2F; oldFormat： 转换前的格式</span><br><span class="line">&#x2F;&#x2F; newFormat： 转换后的格式</span><br><span class="line">func (this *ywcontroller) FormateDateStr(timestr string, oldFormat string, newFormat string) (string, error) &#123;</span><br><span class="line">    formatTime, err :&#x3D; time.Parse(oldFormat, timestr)</span><br><span class="line">    return formatTime.Format(newFormat), err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获得传入的参数，转换为int</span><br><span class="line">func (this *ywcontroller) GetParamAsInt(key string) int &#123;</span><br><span class="line">    num, err :&#x3D; strconv.Atoi(this.GetString(key))</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    return num</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获得当前传入的string参数</span><br><span class="line">func (this *ywcontroller) GetParamAsString(key string) string &#123;</span><br><span class="line">    return this.GetString(key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获得当前传入的参数，防止sql注入，替换一些字符</span><br><span class="line">func (this *ywcontroller) GetParamAsSqlString(key string) string &#123;</span><br><span class="line">    val :&#x3D; strings.Replace(this.GetString(key), &quot;&#39;&quot;, &quot;&#39;&#39;&quot;, -1)</span><br><span class="line">    return val</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line">返回json字符串</span><br><span class="line">输入 status 返回状态, msg 返回信息, data 数据</span><br><span class="line">输出 转换成json字符串 &#123;Status: status, Msg: msg, Data: &quot;&quot;&#125;</span><br><span class="line">*&#x2F;</span><br><span class="line">func (this *ywcontroller) jsonString(status int, msg string, data interface&#123;&#125;) string &#123;</span><br><span class="line">    s :&#x3D; &amp;st_json_normal_data&#123;Status: status, Msg: msg&#125;</span><br><span class="line">    if data &#x3D;&#x3D; nil &#123;</span><br><span class="line">        s.Data &#x3D; &quot;&quot;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        s.Data &#x3D; data</span><br><span class="line">    &#125;</span><br><span class="line">    bt, _ :&#x3D; json.Marshal(s)</span><br><span class="line">    return string(bt)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line">输出一个对象</span><br><span class="line">*&#x2F;</span><br><span class="line">func (this *ywcontroller) ReturnJsonString(status int, msg string, data interface&#123;&#125;) &#123;</span><br><span class="line">    this.Ctx.WriteString(this.jsonString(status, msg, data))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;判断是不是数</span><br><span class="line">func (this *ywcontroller) Is_Number(num string) bool &#123;</span><br><span class="line">    if _, err :&#x3D; strconv.Atoi(num); err !&#x3D; nil &#123;</span><br><span class="line">        return false</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;转换为数字</span><br><span class="line">func (this *ywcontroller) toInt(val interface&#123;&#125;) int &#123;</span><br><span class="line">    num, err :&#x3D; strconv.Atoi(fmt.Sprint(val))</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return 0</span><br><span class="line">    &#125;</span><br><span class="line">    return num</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获取系统路径</span><br><span class="line">func (this *ywcontroller) GetExePath() string &#123;</span><br><span class="line">    exePath :&#x3D; filepath.Dir(os.Args[0])</span><br><span class="line">    if !filepath.IsAbs(exePath) &#123;</span><br><span class="line">        exePath, _ &#x3D; filepath.Abs(exePath)</span><br><span class="line">    &#125;</span><br><span class="line">    return exePath</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line">输出一个对象</span><br><span class="line">*&#x2F;</span><br><span class="line">func (this *ywcontroller) ReturnString(args ...interface&#123;&#125;) &#123;</span><br><span class="line">    &#x2F;&#x2F;任意数据类型转成string</span><br><span class="line">    this.Ctx.WriteString(fmt.Sprint(args...))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (this *ywcontroller) SetUserSession(data map[string]string) &#123;</span><br><span class="line">    for k, v :&#x3D; range data &#123;</span><br><span class="line">        this.SetSession(k, v)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;从session中获取某一个信息</span><br><span class="line">func (this *ywcontroller) GetUserSession(key string) (string, bool) &#123;</span><br><span class="line">    data, ok :&#x3D; this.Ctx.Input.Session(key).(string)</span><br><span class="line">    if !ok &#123;</span><br><span class="line">        return &quot;&quot;, false</span><br><span class="line">    &#125;</span><br><span class="line">    return data, true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;删除所有session</span><br><span class="line">func (this *ywcontroller) DelUserSession() &#123;</span><br><span class="line">    this.DelSession(&quot;id&quot;)</span><br><span class="line">    this.DelSession(&quot;shopid&quot;)</span><br><span class="line">    this.DelSession(&quot;name&quot;)</span><br><span class="line">    &#x2F;&#x2F; 把要删的session全放在这里删掉</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;MD5值</span><br><span class="line">func (this *ywcontroller) md5Value(s string) string &#123;</span><br><span class="line">    h :&#x3D; md5.New()</span><br><span class="line">    h.Write([]byte(s))</span><br><span class="line">    return fmt.Sprintf(&quot;%x&quot;, h.Sum(nil))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;sws的变种MD5</span><br><span class="line">func (this *ywcontroller) SWSMD5(str string) string &#123;</span><br><span class="line">    str &#x3D; this.md5Value(str)</span><br><span class="line">    if len(str) &gt; 8 &#123;</span><br><span class="line">        str &#x3D; str[:3] + &quot;a&quot; + str[3:]</span><br><span class="line">        str &#x3D; str[:5] + &quot;z&quot; + str[5:]</span><br><span class="line">    &#125;</span><br><span class="line">    return str</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;判断是不是图片后缀,是返回false,不是返回true</span><br><span class="line">func (this *ywcontroller) IsImgExt(ext string) bool &#123;</span><br><span class="line"></span><br><span class="line">    for _, oneimg :&#x3D; range ImgExt &#123;</span><br><span class="line">        if strings.ToLower(ext) &#x3D;&#x3D; oneimg &#123;</span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;上传一张照片,返回照片路径</span><br><span class="line">func (this *ywcontroller) UploadOneImg() &#123;</span><br><span class="line">    files :&#x3D; this.GetParamAsSqlString(&quot;file&quot;)</span><br><span class="line">    file, fileheader, err :&#x3D; this.GetFile(files)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        this.ReturnString(this.jsonString(0, err.Error(), &quot;&quot;))</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    defer func() &#123;</span><br><span class="line">        if file !&#x3D; nil &#123;</span><br><span class="line">            file.Close()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    if fileheader.Size &gt; 2000*1024 &#123;</span><br><span class="line">        this.ReturnJsonString(0, &quot;图片大小不得超过2mb&quot;, &quot;&quot;)</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    filename :&#x3D; filepath.Base(fileheader.Filename)</span><br><span class="line">    index :&#x3D; strings.LastIndex(filename, &quot;.&quot;)</span><br><span class="line">    ext :&#x3D; filename[index+1:]</span><br><span class="line">    if this.IsImgExt(ext) &#123;</span><br><span class="line">        this.ReturnString(this.jsonString(0, &quot;仅可上传jpg、gif、png文件&quot;, &quot;&quot;))</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;把文件保存到临时目录</span><br><span class="line">    b, err :&#x3D; ioutil.ReadAll(file)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        log.Println(err)</span><br><span class="line">        this.ReturnString(this.jsonString(0, &quot;上传文件失败&quot;, &quot;&quot;))</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    filepath :&#x3D; &quot;.&#x2F;imgfile&#x2F;&quot; + fmt.Sprintf(&quot;%d.%s&quot;, time.Now().UnixNano(), ext)</span><br><span class="line">    ioutil.WriteFile(filepath, b, 0x644)</span><br><span class="line">    this.ReturnString(this.jsonString(1, &quot;导入成功&quot;, strings.TrimLeft(filepath, &quot;.&quot;)))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;判断文件夹是否存在</span><br><span class="line">func isDirExists(path string) bool &#123;</span><br><span class="line">    fi, err :&#x3D; os.Stat(path)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return os.IsExist(err)</span><br><span class="line">    &#125;</span><br><span class="line">    return fi.IsDir()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;创建文件夹</span><br><span class="line">func CreatePath(path string) &#123;</span><br><span class="line">    if isDirExists(path) &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    err :&#x3D; os.Mkdir(path, 0x644)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        log.Println(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;判断是不是移动端访问 移动端访问返回true 非移动端访问返回false</span><br><span class="line">func (this *ywcontroller) ismobile() bool &#123;</span><br><span class="line">    keywords :&#x3D; []string&#123;&quot;Android&quot;, &quot;iPhone&quot;, &quot;iPod&quot;, &quot;iPad&quot;, &quot;Windows Phone&quot;, &quot;MQQBrowser&quot;&#125;</span><br><span class="line">    for i :&#x3D; 0; i &lt; len(keywords); i++ &#123;</span><br><span class="line">        if strings.Contains(this.Ctx.Request.UserAgent(), keywords[i]) &#123;</span><br><span class="line">            return true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line">获取远程用户IP地址</span><br><span class="line">输入 无</span><br><span class="line">输出 IP地址</span><br><span class="line">*&#x2F;</span><br><span class="line">func (this *ywcontroller) GetRemoteAddr() (string, string) &#123;</span><br><span class="line">    remote_addr :&#x3D; this.Ctx.Request.RemoteAddr</span><br><span class="line">    if npos :&#x3D; strings.LastIndex(remote_addr, &quot;:&quot;); npos !&#x3D; -1 &#123;</span><br><span class="line">        return remote_addr[:npos], remote_addr[npos+1:]</span><br><span class="line">    &#125;</span><br><span class="line">    return remote_addr, &quot;0&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;判断IP是不是IPV4的IP地址</span><br><span class="line">func (this *ywcontroller) IsIPV4(ip string) bool &#123;</span><br><span class="line">    return net.ParseIP(ip) !&#x3D; nil &amp;&amp; net.ParseIP(ip).DefaultMask() !&#x3D; nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="上面的controller封装好之后以此为基础-建立新的controller层"><a href="#上面的controller封装好之后以此为基础-建立新的controller层" class="headerlink" title="上面的controller封装好之后以此为基础,建立新的controller层"></a>上面的controller封装好之后以此为基础,建立新的controller层</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">package controllers</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &quot;log&quot;</span><br><span class="line">    &quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type ShopController struct &#123;</span><br><span class="line">    ywcontroller</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">func (this *ShopController) UpdateShopInfo() &#123;</span><br><span class="line">    &#x2F;&#x2F;根据名称接收数据转为int</span><br><span class="line">    &#x2F;&#x2F;shopid :&#x3D; this.GetParamAsInt(&quot;shopid&quot;)</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;根据名称接收数据类型为string,这里有防止sql注入,下面的没有</span><br><span class="line">    shopid :&#x3D; this.GetParamAsSqlString(&quot;shopid&quot;)</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;根据名称接收数据类型为string,没有防止sql注入,上面的有</span><br><span class="line">    shopid :&#x3D; this.GetParamAsString(&quot;shopid&quot;)</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;获取session里的信息，比如登录</span><br><span class="line">    shopid, ok :&#x3D; this.GetUserSession(&quot;shopid&quot;)</span><br><span class="line">    if !ok&#123;&#x2F;&#x2F;做一些事,比如返回首页&#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;删除session</span><br><span class="line">    &#x2F;&#x2F;this.DelUserSession()</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置session</span><br><span class="line">    &#x2F;&#x2F;this.SetUserSession(map[string]string&#123;&quot;shopid&quot;: &quot;1&quot;,&quot;id&quot;:&quot;1&quot;,&quot;tel&quot;:&quot;123&quot;&#125;)</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;返回页面(可携带数据,借助模版语句起到修改页面的作用)</span><br><span class="line">    this.Data[&quot;height&quot;] &#x3D; &quot;100&quot;</span><br><span class="line">    this.TplName &#x3D; &quot;shopauditingsinfo.html&quot;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;返回字符串(这里是返回了分页查询结果的字符串)</span><br><span class="line">    data, err :&#x3D; models.Querylist(&quot;select * from shopauditings&quot;, pageindex, pagesize)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        log.Println(err)</span><br><span class="line">        this.ReturnJsonString(0, &quot;获取店铺信息列表失败&quot;, &quot;&quot;)</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    bt, _ :&#x3D; json.Marshal(data)</span><br><span class="line">    this.ReturnString(string(bt))</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;返回json字符串(状态值、消息字符串,数据),数据是interface&#123;&#125;</span><br><span class="line">    &#x2F;&#x2F;this.ReturnJsonString(0, &quot;获取店铺信息列表失败&quot;, &quot;&quot;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">上面用this.Data[&quot;height&quot;] &#x3D; &quot;100&quot;携带到页面的数据,可以用模版语句利用</span><br><span class="line"></span><br><span class="line">js里面</span><br><span class="line">if(&quot;&#123;&#123;.height&#125;&#125;&quot; !&#x3D; &quot;&quot;)&#123;</span><br><span class="line">    &#x2F;&#x2F;执行一些代码</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">页面里</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; style&#x3D;&quot;display:none&quot; value&#x3D;&quot;&#123;&#123;.height&#125;&#125;&quot; &gt;</span><br><span class="line"></span><br><span class="line">页面或者js里进行比较(这里ne是不相等,eq是相等,之前有过一次用eq没效果,换成isEqual就行了)</span><br><span class="line">&#123;&#123;if ne .height &quot;1&quot;&#125;&#125;</span><br><span class="line">一些代码</span><br><span class="line">&#123;&#123;else&#125;&#125;</span><br><span class="line">一些代码</span><br><span class="line">&#123;&#123;end&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="beego框架里model层的连接数据库和一些查询方法封装"><a href="#beego框架里model层的连接数据库和一些查询方法封装" class="headerlink" title="beego框架里model层的连接数据库和一些查询方法封装"></a>beego框架里model层的连接数据库和一些查询方法封装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br></pre></td><td class="code"><pre><span class="line">package models</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;database&#x2F;sql&quot;</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &#x2F;&#x2F; 下面这个连接mysql的时候用</span><br><span class="line">    _ &quot;github.com&#x2F;go-sql-driver&#x2F;mysql&quot;</span><br><span class="line">    &#x2F;&#x2F;下面这个连接oracle的时候用</span><br><span class="line">    &#x2F;&#x2F;_ &quot;github.com&#x2F;jzaikovs&#x2F;ora&quot;</span><br><span class="line">    &quot;io&#x2F;ioutil&quot;</span><br><span class="line">    &quot;log&quot;</span><br><span class="line">    &quot;os&quot;</span><br><span class="line">    &quot;path&#x2F;filepath&quot;</span><br><span class="line">    &quot;strconv&quot;</span><br><span class="line">    &quot;strings&quot;</span><br><span class="line">    &quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var (</span><br><span class="line">    dbconn *sql.DB &#x3D; nil</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 返回数据库可以直接查询</span><br><span class="line">func GetConn() *sql.DB &#123;</span><br><span class="line">    return dbconn</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;返回事务</span><br><span class="line">func GetTx() (*sql.Tx, error) &#123;</span><br><span class="line">    return dbconn.Begin()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;打开数据库(顺便建表、初始化数据或者加入存储过程等)</span><br><span class="line">&#x2F;&#x2F;在main.go里面执行下面语句以执行</span><br><span class="line">&#x2F;&#x2F;err :&#x3D; models.Init()</span><br><span class="line">&#x2F;&#x2F;  if err !&#x3D; nil &#123;</span><br><span class="line">&#x2F;&#x2F;      log.Panic(err.Error())</span><br><span class="line">&#x2F;&#x2F;  &#125;</span><br><span class="line">&#x2F;&#x2F;  err &#x3D; models.DBInit()</span><br><span class="line">&#x2F;&#x2F;  if err !&#x3D; nil &#123;</span><br><span class="line">&#x2F;&#x2F;      log.Panic(err.Error())</span><br><span class="line">&#x2F;&#x2F;  &#125;</span><br><span class="line">func DBInit() error &#123;</span><br><span class="line">    &#x2F;&#x2F; 这个是链接mysql</span><br><span class="line">    &#x2F;&#x2F;sql.Open(mysql,root:root@tcp(192.168.15.51:3306)&#x2F;ecommerce)</span><br><span class="line">    sqldb, err :&#x3D; sql.Open(GetConfig().DBType, GetConfig().DBSour)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return fmt.Errorf(&quot;打开数据库失败：%s&quot;, err.Error())</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 这个是链接oracle (用户名&#x2F;密码@&#x2F;&#x2F;ip:端口&#x2F;数据库名)</span><br><span class="line">    &#x2F;&#x2F; sqldb2, err :&#x3D; sql.Open(&quot;ora&quot;, &quot;system&#x2F;oracle@&#x2F;&#x2F;172.16.18.96:1522&#x2F;wlsi&quot;)</span><br><span class="line">    &#x2F;&#x2F; if err !&#x3D; nil &#123;</span><br><span class="line">    &#x2F;&#x2F;  return fmt.Errorf(&quot;打开数据库失败：%s&quot;, err.Error())</span><br><span class="line">    &#x2F;&#x2F; &#125;</span><br><span class="line">    Dbconn2 &#x3D; sqldb2</span><br><span class="line">    dbconn &#x3D; sqldb</span><br><span class="line">    CreateTable()</span><br><span class="line">    initData()</span><br><span class="line">    return nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;建表(在相应文件里放入文件,里面写对应的sql的语句,程序启动时候自动执行，可以建表或者自动增加存储过程)</span><br><span class="line">func CreateTable() &#123;</span><br><span class="line">    dir :&#x3D; []string&#123;&quot;.&#x2F;table&#x2F;table&quot;, &quot;.&#x2F;table&#x2F;drop&quot;, &quot;.&#x2F;table&#x2F;create&quot;&#125;</span><br><span class="line">    for _, one :&#x3D; range dir &#123;</span><br><span class="line">        filepath.Walk(one, func(path string, fs os.FileInfo, err error) error &#123;</span><br><span class="line">            if !fs.IsDir() &#123;</span><br><span class="line">                b, err :&#x3D; ioutil.ReadFile(path)</span><br><span class="line">                if err !&#x3D; nil &#123;</span><br><span class="line">                    log.Panic(err.Error())</span><br><span class="line">                &#125;</span><br><span class="line">                _, err &#x3D; dbconn.Exec(string(b))</span><br><span class="line">                if err !&#x3D; nil &#123;</span><br><span class="line">                    log.Panic(err.Error())</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return nil</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;初始化数据</span><br><span class="line">func initData() &#123;</span><br><span class="line">    NotFindDoExec(&quot;select count(*) as num from config where &#96;key&#96;&#x3D;&#39;password&#39;&quot;,</span><br><span class="line">        &quot;insert into config(&#96;key&#96;,&#96;value&#96;) values(&#39;password&#39;,&#39;123456&#39;)&quot;)</span><br><span class="line"></span><br><span class="line">    filepath.Walk(&quot;.&#x2F;datainit&quot;, func(path string, fs os.FileInfo, err error) error &#123;</span><br><span class="line">        if !fs.IsDir() &#123;</span><br><span class="line">            tableName :&#x3D; strings.Replace(fs.Name(), filepath.Ext(fs.Name()), &quot;&quot;, 1)</span><br><span class="line">            bSql, err :&#x3D; ioutil.ReadFile(path)</span><br><span class="line">            if err !&#x3D; nil &#123;</span><br><span class="line">                log.Panic(err.Error())</span><br><span class="line">            &#125;</span><br><span class="line">            num, err :&#x3D; Count(&quot;select count(*) as num from &quot; + tableName)</span><br><span class="line">            if err !&#x3D; nil &#123;</span><br><span class="line">                log.Panic(err.Error())</span><br><span class="line">            &#125;</span><br><span class="line">            if num &#x3D;&#x3D; 0 &#123;</span><br><span class="line">                sql :&#x3D; string(bSql)</span><br><span class="line">                arrsql :&#x3D; strings.Split(sql, &quot;;\r\n&quot;)</span><br><span class="line">                for _, v :&#x3D; range arrsql &#123;</span><br><span class="line">                    err :&#x3D; Exec(v)</span><br><span class="line">                    if err !&#x3D; nil &#123;</span><br><span class="line">                        log.Panic(err)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return nil</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;方便查询，目前返回[]map[string]string内容</span><br><span class="line">func Query(sql string) ([]map[string]string, error) &#123;</span><br><span class="line">    rows, err :&#x3D; dbconn.Query(sql)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        log.Println(sql, err.Error())</span><br><span class="line">        return nil, err</span><br><span class="line">    &#125;</span><br><span class="line">    return RowsToMapList(rows)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Exec(sql string) error &#123;</span><br><span class="line">    _, err :&#x3D; dbconn.Exec(sql)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        log.Println(sql, err.Error())</span><br><span class="line">    &#125;</span><br><span class="line">    return err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func QueryTableList(query string, pageindex int, pagesize int) (map[string]interface&#123;&#125;, error) &#123;</span><br><span class="line">    if pagesize &lt;&#x3D; 0 &#123;</span><br><span class="line">        pagesize &#x3D; 10</span><br><span class="line">    &#125;</span><br><span class="line">    if pageindex &lt;&#x3D; 0 &#123;</span><br><span class="line">        pageindex &#x3D; 1</span><br><span class="line">    &#125;</span><br><span class="line">    totalCount :&#x3D; 0</span><br><span class="line"></span><br><span class="line">    table_map :&#x3D; make(map[string]interface&#123;&#125;)</span><br><span class="line">    table_data :&#x3D; make([]map[string]interface&#123;&#125;, 0)</span><br><span class="line">    rows, err :&#x3D; dbconn.Query(query)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return table_map, err</span><br><span class="line">    &#125;</span><br><span class="line">    fields, err :&#x3D; rows.Columns()</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return table_map, err</span><br><span class="line">    &#125;</span><br><span class="line">    fields_size :&#x3D; len(fields)</span><br><span class="line">    &#x2F;&#x2F;移到开始位置</span><br><span class="line">    n :&#x3D; time.Now()</span><br><span class="line">    for totalCount &lt; (pageindex-1)*pagesize &amp;&amp; rows.Next() &#123;</span><br><span class="line">        totalCount++</span><br><span class="line">    &#125;</span><br><span class="line">    log.Println(time.Now().Sub(n))</span><br><span class="line">    hxindex :&#x3D; (pageindex - 1) * pagesize</span><br><span class="line">    &#x2F;&#x2F;取值</span><br><span class="line">    n &#x3D; time.Now()</span><br><span class="line">    for rows.Next() &#123;</span><br><span class="line">        addmap :&#x3D; make(map[string]interface&#123;&#125;)</span><br><span class="line">        hxindex++</span><br><span class="line">        totalCount++</span><br><span class="line">        if len(table_data) &gt;&#x3D; pagesize &#123;</span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">        values :&#x3D; make([]sql.NullString, fields_size)</span><br><span class="line">        scanArgs :&#x3D; make([]interface&#123;&#125;, fields_size)</span><br><span class="line">        for i :&#x3D; 0; i &lt; fields_size; i++ &#123;</span><br><span class="line">            scanArgs[i] &#x3D; &amp;values[i]</span><br><span class="line">        &#125;</span><br><span class="line">        err &#x3D; rows.Scan(scanArgs...)</span><br><span class="line">        dataMap, err :&#x3D; rowToMap(values, fields)</span><br><span class="line">        if err !&#x3D; nil &#123;</span><br><span class="line">            return table_map, err</span><br><span class="line">        &#125;</span><br><span class="line">        dataMap[&quot;xhid&quot;] &#x3D; fmt.Sprint(hxindex)</span><br><span class="line">        addmap[&quot;id&quot;] &#x3D; fmt.Sprint(hxindex)</span><br><span class="line">        addmap[&quot;cell&quot;] &#x3D; dataMap</span><br><span class="line">        table_data &#x3D; append(table_data, addmap)</span><br><span class="line">    &#125;</span><br><span class="line">    log.Println(time.Now().Sub(n))</span><br><span class="line">    n &#x3D; time.Now()</span><br><span class="line">    for rows.Next() &#123;</span><br><span class="line">        totalCount++</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    log.Println(time.Now().Sub(n))</span><br><span class="line">    totalPage :&#x3D; 0</span><br><span class="line">    if totalCount%pagesize &#x3D;&#x3D; 0 &#123;</span><br><span class="line">        totalPage &#x3D; totalCount &#x2F; pagesize</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        totalPage &#x3D; totalCount&#x2F;pagesize + 1</span><br><span class="line">    &#125;</span><br><span class="line">    table_map[&quot;pageIndex&quot;] &#x3D; pageindex</span><br><span class="line">    table_map[&quot;totalCount&quot;] &#x3D; totalCount</span><br><span class="line">    table_map[&quot;pageSize&quot;] &#x3D; pagesize</span><br><span class="line">    table_map[&quot;totalPage&quot;] &#x3D; totalPage</span><br><span class="line">    table_map[&quot;data&quot;] &#x3D; table_data</span><br><span class="line">    return table_map, nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;查询结果集row 的[]string转成map</span><br><span class="line">func rowToMap(rows []sql.NullString, fields []string) (map[string]string, error) &#123;</span><br><span class="line">    rstMap :&#x3D; make(map[string]string)</span><br><span class="line">    if len(rows) !&#x3D; len(fields) &#123;</span><br><span class="line">        return rstMap, fmt.Errorf(&quot;数据库查询结果集：rows与fields的数量不相等&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    for k, v :&#x3D; range rows &#123;</span><br><span class="line">        rstMap[fields[k]] &#x3D; v.String</span><br><span class="line">    &#125;</span><br><span class="line">    return rstMap, nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;数据库查询rows转换成maplist类型</span><br><span class="line">func RowsToMapList(rows *sql.Rows) ([]map[string]string, error) &#123;</span><br><span class="line">    var maplist []map[string]string &#x3D; make([]map[string]string, 0)</span><br><span class="line">    cols, err :&#x3D; rows.Columns()</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return nil, err</span><br><span class="line">    &#125;</span><br><span class="line">    colsize :&#x3D; len(cols)</span><br><span class="line">    for rows.Next() &#123;</span><br><span class="line">        values :&#x3D; make([]sql.NullString, colsize)</span><br><span class="line">        scanArgs :&#x3D; make([]interface&#123;&#125;, colsize)</span><br><span class="line">        for i :&#x3D; 0; i &lt; colsize; i++ &#123;</span><br><span class="line">            scanArgs[i] &#x3D; &amp;values[i]</span><br><span class="line">        &#125;</span><br><span class="line">        err &#x3D; rows.Scan(scanArgs...)</span><br><span class="line">        oneMap :&#x3D; make(map[string]string)</span><br><span class="line">        for k, v :&#x3D; range values &#123;</span><br><span class="line">            oneMap[cols[k]] &#x3D; v.String</span><br><span class="line">        &#125;</span><br><span class="line">        maplist &#x3D; append(maplist, oneMap)</span><br><span class="line">    &#125;</span><br><span class="line">    return maplist, nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Find(sql string) (map[string]string, error) &#123;</span><br><span class="line">    maplist, err :&#x3D; Query(sql)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        log.Println(&quot;error:&quot;, err.Error(), sql)</span><br><span class="line">        return nil, fmt.Errorf(&quot;请稍后&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    if len(maplist) &#x3D;&#x3D; 0 &#123;</span><br><span class="line">        return nil, nil</span><br><span class="line">    &#125;</span><br><span class="line">    return maplist[0], nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 用sql语句查数据,自己count(1)起个别名num,返回num</span><br><span class="line">&#x2F;&#x2F;比如NotFindDoExec(&quot;select count(*) as num from config where &#96;key&#96;&#x3D;&#39;password&#39;&quot;,&quot;insert into config(&#96;key&#96;,&#96;value&#96;) values(&#39;password&#39;,&#39;123456&#39;)&quot;)</span><br><span class="line">func Count(sql string) (int, error) &#123;</span><br><span class="line">    map_data, err :&#x3D; Find(sql)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return 0, err</span><br><span class="line">    &#125;</span><br><span class="line">    num, err :&#x3D; strconv.Atoi(map_data[&quot;num&quot;])</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return 0, err</span><br><span class="line">    &#125;</span><br><span class="line">    return num, nil</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; count里面查出来的num如果为0,再去执行</span><br><span class="line">func NotFindDoExec(query, exec string) &#123;</span><br><span class="line">    num, err :&#x3D; Count(query)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        log.Panic(err.Error())</span><br><span class="line">    &#125;</span><br><span class="line">    if num &#x3D;&#x3D; 0 &#123;</span><br><span class="line">        _, err &#x3D; GetConn().Exec(exec)</span><br><span class="line">        if err !&#x3D; nil &#123;</span><br><span class="line">            log.Panic(err.Error())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="beego框架里model层的读取config-xml里的一些配置项"><a href="#beego框架里model层的读取config-xml里的一些配置项" class="headerlink" title="beego框架里model层的读取config.xml里的一些配置项"></a>beego框架里model层的读取config.xml里的一些配置项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">package models</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;encoding&#x2F;xml&quot;</span><br><span class="line">    &quot;io&#x2F;ioutil&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var (</span><br><span class="line">    config *Config &#x3D; nil</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type Config struct &#123;</span><br><span class="line">    DBType        string &#96;xml:&quot;dbtype&quot;&#96;</span><br><span class="line">    DBSour        string &#96;xml:&quot;dbsour&quot;&#96;</span><br><span class="line">    Product       string &#96;xml:&quot;product&quot;&#96;</span><br><span class="line">    Lv            int    &#96;xml:&quot;lv&quot;&#96;</span><br><span class="line">    EmailAddr     string &#96;xml:&quot;emailaddr&quot;&#96;</span><br><span class="line">    Authorization string &#96;xml:&quot;authorization&quot;&#96;</span><br><span class="line">    NiceName      string &#96;xml:&quot;nicename&quot;&#96;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func GetConfig() *Config &#123;</span><br><span class="line">    return config</span><br><span class="line">    &#x2F;&#x2F; 可以在其他models里用GetConfig()这个方法获取读取结果，再从结果里拿具体的配置</span><br><span class="line">    &#x2F;&#x2F;GetConfig().DBType</span><br><span class="line">    &#x2F;&#x2F;GetConfig().DBSour</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;在main.go里面执行下面语句以执行各个models层里的Init()</span><br><span class="line">&#x2F;&#x2F;err :&#x3D; models.Init()</span><br><span class="line">&#x2F;&#x2F;  if err !&#x3D; nil &#123;</span><br><span class="line">&#x2F;&#x2F;      log.Panic(err.Error())</span><br><span class="line">&#x2F;&#x2F;  &#125;</span><br><span class="line">&#x2F;&#x2F;  err &#x3D; models.DBInit()</span><br><span class="line">&#x2F;&#x2F;  if err !&#x3D; nil &#123;</span><br><span class="line">&#x2F;&#x2F;      log.Panic(err.Error())</span><br><span class="line">&#x2F;&#x2F;  &#125;</span><br><span class="line">func Init() error &#123;</span><br><span class="line">    b_config, err :&#x3D; ioutil.ReadFile(&quot;.&#x2F;conf&#x2F;config.xml&quot;)</span><br><span class="line">    if err !&#x3D; nil &#123;</span><br><span class="line">        return err</span><br><span class="line">    &#125;</span><br><span class="line">    return xml.Unmarshal(b_config, &amp;config)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/golang/" rel="tag"># golang</a>
+              <a href="/tags/beego/" rel="tag"># beego</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/17/map/" rel="prev" title="百度地图api显示公司地址">
+      <i class="fa fa-chevron-left"></i> 百度地图api显示公司地址
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/16/%E6%A1%86%E6%9E%B6%E6%8F%92%E4%BB%B6/" rel="next" title="框架和插件">
+      框架和插件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#beego%E6%A1%86%E6%9E%B6%E9%87%8Ccontroller%E5%B1%82%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%B0%81%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">beego框架里controller层的一些常用封装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#beego%E6%A1%86%E6%9E%B6%E9%87%8Ccontroller%E5%B1%82%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%B0%81%E8%A3%85-1"><span class="nav-number">1.1.</span> <span class="nav-text">beego框架里controller层的一些常用封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E9%9D%A2%E7%9A%84controller%E5%B0%81%E8%A3%85%E5%A5%BD%E4%B9%8B%E5%90%8E%E4%BB%A5%E6%AD%A4%E4%B8%BA%E5%9F%BA%E7%A1%80-%E5%BB%BA%E7%AB%8B%E6%96%B0%E7%9A%84controller%E5%B1%82"><span class="nav-number">1.2.</span> <span class="nav-text">上面的controller封装好之后以此为基础,建立新的controller层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beego%E6%A1%86%E6%9E%B6%E9%87%8Cmodel%E5%B1%82%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E4%B8%80%E4%BA%9B%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">beego框架里model层的连接数据库和一些查询方法封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beego%E6%A1%86%E6%9E%B6%E9%87%8Cmodel%E5%B1%82%E7%9A%84%E8%AF%BB%E5%8F%96config-xml%E9%87%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">1.4.</span> <span class="nav-text">beego框架里model层的读取config.xml里的一些配置项</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yuanmeizi</p>
+  <div class="site-description" itemprop="description">斯人若彩虹,遇上方知有</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yuanmeizi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='153,153,153' opacity='0.8' zIndex='-1' count='144' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":160,"height":320},"mobile":{"show":false},"rect":{"opacity":1},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
